@@ -17,3 +17,57 @@ Solution:
 
 Setup Script
 ./setup-usb.sh
+
+# Auto-Mount Configuration
+
+The USB is configured to mount automatically using `/etc/fstab` and UUID.
+
+###  Steps
+
+#### 1. Get UUID
+```bash
+   lsblk -f
+```
+
+#### 2. Create mount points
+
+```bash
+mkdir -p ~/usb/sda1
+mkdir -p ~/usb/sda2
+```
+
+#### 3. Edit fstab
+
+```bash
+sudo nano /etc/fstab
+```
+
+Add entries:
+
+```
+UUID=XXXX   /home/user/usb/sda1   ext4    defaults,user   0   0
+UUID=XXXX   /home/user/usb/sda2   exfat   defaults,user   0   0
+```
+
+#### 4. Apply configuration
+
+```bash
+sudo mount -a
+```
+
+---
+
+##  Testing
+
+1. Unplug the USB device
+2. Plug it again
+3. Run:
+
+```bash
+lsblk
+```
+### Screen Shot of Result
+![USB Auto-Moutn Output](lsblk-output.png)
+
+
+
