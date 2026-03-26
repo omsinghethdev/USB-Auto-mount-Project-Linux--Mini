@@ -4,13 +4,13 @@
 ##Instead of mounting manually every time,the USB now mounts automatically to a fixed directory.
 
 
-#Problem:
+###Problem:
  When plugging in a USB device:
  It mounts to random locations
  Device name changes
  Manual mounting is required each time
 
-#Solution:
+##Solution:
  Used UUID for stable identification
  Configured /etc/fstab for auto-mount
  Created custom mount points
