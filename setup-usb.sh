@@ -1,29 +1,42 @@
 #!/bin/bash
 echo "Warning:This will erase all data on the USB device!"
-read -p "Enter device: " DEV
+while true; do
+read -p "Enter device(eg., /dev/sdb) " DEV
 if [ -z "$DEV" ]; then
-    echo "No device entered. Exiting."
-    exit 1
+    echo "No device entered. Try again..."
+    continue
 fi
-read -p "Are you sure? (yes/no): " CONFIRM
-
-if [ "$CONFIRM" != "yes" ]; then
-echo "Aborted."
-exit 1
+if [ ! -b "$DEV" ]; then
+	echo "[ERROR] Device does not exist or is not valid. Try agian...."
+	continue
 fi
-echo "Unmounting existing partitions...."
-sudo umount ${DEV}?* 2>/dev/null
+break
+done
+attempt=0
+max_attempt=3
 
-echo "Creatin partition table...."
-sudo parted -s  $DEV mklabel gpt
+while true; do 
+	read -p "Type the device name again to confirm: " CONFIRM_DEV
+	
+	if [ "$CONFIRM_DEV" = "$DEV" ]; then
+		echo "[OK] Confirmation successful. Proceeding..."
+		break
+	else
+		echo "[ERROR] Device name mismatch."
+		attempt=$((attempt+1))
+		
+	if [ $attempt -ge $max_attempt ]; then
+		echo "[ERROR] Too many failed attempts. Exiting..."
+		exit 1
+	fi
+		
+	read -p "Do you want to retry? (yes/no): " choice
+	if [ "$choice" != "yes" ]; then
+		echo "Exiting...."
+		exit 1
+	fi
+	fi
+done
 
 
-echo "Creating partions..."
-sudo parted -s -a optimal $DEV mkpart primary ext4 1MiB 50%
-sudo parted -s -a optimal $DEV mkpart primary  50% 100%
-
-echo "Formatting partitions..."
-sudo mkfs.ext4 ${DEV}1
-sudo mkfs.exfat ${DEV}2
-echo "Done! USB prepared successfully."
 
