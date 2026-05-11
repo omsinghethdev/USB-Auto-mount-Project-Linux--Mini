@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 # USB Auto-Mount Project(Linux)
 
 ## Overview:This project demonstrates how to automatically mount a USB pendrive in Linux using UUID and /etc/fstab
 ## Instead of mounting manually every time,the USB now mounts automatically to a fixed directory.
+=======
+# Linux USB Automation Tool
 
+## Description
+>>>>>>> feature-safe-usb
 
+Linux USB Automation Tool is a Bash scripting project that automates USB storage management tasks such as:
+
+<<<<<<< HEAD
 ### Problem:
  When plugging in a USB device:
  It mounts to random locations
@@ -68,6 +76,43 @@ lsblk
 ```
 ### Screen Shot of Result
 ![USB Auto-Moutn Output](lsblk-output.png)
+=======
+- Device detection and validation
+- Partition table creation
+- Partition creation
+- Filesystem formatting
+- Mounting partitions
+
+The project is designed for learning Linux system administration, Bash scripting, and storage automation concepts.
+>>>>>>> feature-safe-usb
 
 
 
+
+## Features
+
+- USB device validation
+- Confirmation-based safety system
+- Partition table creation (GPT/MSDOS)
+- Single partition creation
+- Filesystem formatting
+  - ext4
+  - FAT32
+  - NTFS
+- Partition mounting
+- Error handling and validation
+- Modular Bash scripting structure
+
+## Screenshots
+
+
+![Device Detection](screenshots/output1.png)
+
+
+![Partition Creation](screenshots/output2.png)
+
+ 
+![Formatting](screenshots/output3.png)
+
+
+![Mount](screenshots/output4.png)
