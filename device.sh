@@ -4,7 +4,7 @@ attempt=0
 max_attempt=3
 
 while true; do
-read -p "Enter device(eg., /dev/sdb) " DEV
+read -p "Enter device(eg. /dev/sdb) " DEV
 if [ -z "$DEV" ]; then
     echo "No device entered. Try again..."
     continue
@@ -14,7 +14,7 @@ if [ ! -b "$DEV" ]; then
 	attempt=$((attempt+1))
 
 	if [ $attempt -ge $max_attempt ]; then
-	read -p "Type the device name again to confirm: " 
+	
 		echo "[ERROR] Too many invalid attempts. Exiting...."
 		exit 1
 	fi
@@ -47,3 +47,5 @@ while true; do
 	fi
 	fi
 done
+DEVICE="$CONFIRM_DEV"
+export DEVICE

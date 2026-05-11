@@ -1,3 +1,7 @@
+if [ -z "$DEVICE" ]; then
+	echo "[ERROR] No device selected."
+	exit 1
+fi
 while true; do
 	read -p "Enter partition table type (gpt/msdos): " PTABLE
 	
@@ -38,10 +42,10 @@ while true;do
 done
 	if [ "$PCOUNT" -ne 1 ]; then
 		echo "[ERROR] Currently 1 partion is supported."
-		exti 1
+		exit 1
 	fi
 echo
-echo "This will erase all the data on  ${CONFIRM_DEV} "
+echo "This will erase all the data on  ${DEVICE} "
 
 read -p "Do you want to continue? (yes/no)" CONFIRM
 
@@ -52,7 +56,7 @@ read -p "Do you want to continue? (yes/no)" CONFIRM
 
 	echo
 	echo "[INFO]Creating partition table..."
-	parted -s "$CONFIRM_DEV" mklabel "$PTABLE"
+	parted -s "$DEVICE" mklabel "$PTABLE"
 
 		if [ $? -ne 0 ]; then
 			echo "[INFO] Failed to create partition table."
@@ -61,8 +65,8 @@ read -p "Do you want to continue? (yes/no)" CONFIRM
 	echo "[OK] Partition table created successfully."
 	echo
 	echo "[INFO]Creating partition..."
-	parted -s "$CONFIRM_DEV" mkpart primary ext4 0% 100%
-		if[ $? -ne 0 ]; then
+	parted -s "$DEVICE" mkpart primary ext4 0% 100%
+		if [ $? -ne 0 ]; then
 			echo "Partition creation failed."
 			exit 1
 		fi
@@ -70,15 +74,15 @@ read -p "Do you want to continue? (yes/no)" CONFIRM
 	echo
 	echo "[INFO]Reloading partition table."	
 
-	partprob "$CONFIRM_DEV"
-	PARTITION="${CONFIRM_DEV}1"
+	partprobe "$DEVICE"
+	PARTITION="${DEVICE}1"
 	export PARTITION
 
 	echo "[OK]Created partition: $PARTITION"
 	echo
 	echo "[INFO]Current partition layout"
-	lsblk "$CONFIRM_DEV"
+	lsblk "$DEVICE"
 
 
 	echo "[INFO]Seclected partion: ${PARTITION}"
-	
+

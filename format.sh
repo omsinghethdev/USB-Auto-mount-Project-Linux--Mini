@@ -1,6 +1,6 @@
 
-if [ -z "$PARTITION"]; then
-    echo "[ERROR]No partion found."
+if [ -z "$PARTITION" ]; then
+    echo "[ERROR]No partition found."
     exit 1
 fi
 
@@ -12,7 +12,7 @@ while true; do
     echo "2. FAT32"
     echo "3. NTFS"
     read -p "Enter your choise(1-3):" FS_CHOICE
-        if [ -z "$FS_CHOICE"]; then
+        if [ -z "$FS_CHOICE" ]; then
             echo "[ERROR]NO input.Try again"
             continue
         fi
@@ -53,7 +53,7 @@ done
                   mkfs.ntfs  -F "$PARTITION"
         esac
 
-        if [$? -ne 0]; then
+        if [ $? -ne 0 ]; then
             echo "[ERROR]Formatting failed"
             exit 1
         fi
