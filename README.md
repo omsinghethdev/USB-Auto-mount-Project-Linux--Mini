@@ -1,20 +1,44 @@
-# USB Auto-Mount Project and Disk Tool(Work in Progress)
+# Linux USB Automation Tool
 
-# Description
- This project is a bash based tool to safely manage USB devices, including validation and partition handling
+## Description
+
+Linux USB Automation Tool is a Bash scripting project that automates USB storage management tasks such as:
+
+- Device detection and validation
+- Partition table creation
+- Partition creation
+- Filesystem formatting
+- Mounting partitions
+
+The project is designed for learning Linux system administration, Bash scripting, and storage automation concepts.
 
 
 
 
-# Current Features
- -Device input system
- -Devic validation
- -Strong conformation system
- -Retry machanism
+## Features
+
+- USB device validation
+- Confirmation-based safety system
+- Partition table creation (GPT/MSDOS)
+- Single partition creation
+- Filesystem formatting
+  - ext4
+  - FAT32
+  - NTFS
+- Partition mounting
+- Error handling and validation
+- Modular Bash scripting structure
+
+## Screenshots
 
 
+![Device Detection](screenshots/output1.png)
 
-# Work in progress
- **Partition creation**
- **Filesystem selection**
- ** Auto-mount **
+
+![Partition Creation](screenshots/output2.png)
+
+ 
+![Formatting](screenshots/output3.png)
+
+
+![Mount](screenshots/output4.png)

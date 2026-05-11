@@ -44,13 +44,13 @@ done
 
         case "$FILESYSTEM" in
             ext4)
-                  mkfs.ext4 -F "$PARTITION"
+                  sudo mkfs.ext4 -F "$PARTITION"
                   ;;
             vfat)
-                  mkfs.vfat  "$PARTITION"
+                  sudo mkfs.vfat  "$PARTITION"
                   ;;
             ntfs)
-                  mkfs.ntfs  -F "$PARTITION"
+                  sudo mkfs.ntfs  -F "$PARTITION"
         esac
 
         if [ $? -ne 0 ]; then

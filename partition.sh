@@ -47,7 +47,7 @@ done
 echo
 echo "This will erase all the data on  ${DEVICE} "
 
-read -p "Do you want to continue? (yes/no)" CONFIRM
+read -p "Do you want to continue? (yes/no):" CONFIRM
 
 		if [ "$CONFIRM" != 'yes' ]; then
 			echo "[INFO] Operation Cancelled."
@@ -56,7 +56,7 @@ read -p "Do you want to continue? (yes/no)" CONFIRM
 
 	echo
 	echo "[INFO]Creating partition table..."
-	parted -s "$DEVICE" mklabel "$PTABLE"
+	sudo parted -s "$DEVICE" mklabel "$PTABLE"
 
 		if [ $? -ne 0 ]; then
 			echo "[INFO] Failed to create partition table."
@@ -65,7 +65,7 @@ read -p "Do you want to continue? (yes/no)" CONFIRM
 	echo "[OK] Partition table created successfully."
 	echo
 	echo "[INFO]Creating partition..."
-	parted -s "$DEVICE" mkpart primary ext4 0% 100%
+	sudo parted -s "$DEVICE" mkpart primary ext4 0% 100%
 		if [ $? -ne 0 ]; then
 			echo "Partition creation failed."
 			exit 1
