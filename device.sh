@@ -14,6 +14,7 @@ if [ ! -b "$DEV" ]; then
 	attempt=$((attempt+1))
 
 	if [ $attempt -ge $max_attempt ]; then
+	read -p "Type the device name again to confirm: " 
 		echo "[ERROR] Too many invalid attempts. Exiting...."
 		exit 1
 	fi
@@ -25,7 +26,7 @@ confirm_attempt=0
 confirm_max=3
 
 while true; do 
-	read -p "Type the device name again to confirm: " CONFIRM_DEV
+	read -p "Type the device name again to confirm:" CONFIRM_DEV
 	
 	if [ "$CONFIRM_DEV" = "$DEV" ]; then
 		echo "[OK] Confirmation successful. Proceeding..."
