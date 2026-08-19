@@ -1,5 +1,6 @@
 SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 source ${SCRIPT_DIR}/../lib/log.sh
+source ${SCRIPT_DIR}/../lib/json.sh
 
 
 #Description:List physical disk devices, excluding loop and rom devices
@@ -40,9 +41,13 @@ disk_info(){
 disk_exists(){
     local disk_name="$1"
     if [ -b "/dev/$disk_name" ]; then
+        log "INFO" "disk" "Disk $disk_name exist"
+        local data=$(json_obj_create "disk" "${disk_name}" "exist" "true")
+        json_success "${data}"
         return 0
     else
-        log "WARN" "disk" "Disk $disk_name does not exitst" 
+        log "WARN" "disk" "Disk $disk_name does not exist" 
+        json_error "invalid-disk" "Disk $disk_name does not exist"
         return 1
     fi
 }
